@@ -98,10 +98,15 @@ endif()
 # Finalize config header
 configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
+set(MG_LIBS ${UTIL_LIBRARY})
+if (ENABLE_CURSES AND CURSES_LIBRARIES)
+  list(APPEND MG_LIBS ${CURSES_LIBRARIES})
+endif()
+
 add_executable(mg ${MG_SRCS})
 target_compile_definitions(mg PUBLIC -DDATADIR=\"${DATADIR}\" -DDOCDIR=\"${DOCDIR}\")
-if (ENABLE_CURSES AND CURSES_LIBRARIES)
-  target_link_libraries(mg ${CURSES_LIBRARIES})
+if (MG_LIBS)
+  target_link_libraries(mg ${MG_LIBS})
 endif()
 install(TARGETS mg
   RUNTIME DESTINATION ${BIN_DIR}

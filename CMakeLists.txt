@@ -13,6 +13,8 @@ option(ENABLE_DIRED "directory editor" ON)
 option(ENABLE_REGEXP "full regexp search" ON)
 option(ENABLE_CURSES "use system (n)curses package" ON)
 
+find_library(UTIL_LIBRARY util)
+
 include(CheckIncludeFiles)
 check_include_files(pty.h HAVE_PTY_H)
 check_include_files(utmp.h HAVE_UTMP_H)
