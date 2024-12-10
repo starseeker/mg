@@ -89,13 +89,20 @@ foreach(lsrc ${lib_srcs})
 endforeach()
 
 # For building without ncurses
-list(APPEND MG_SRCS ansi.c ansi.h)
+if (NOT ENABLE_CURSES OR NOT CURSES_LIBRARIES)
+  list(APPEND MG_SRCS ansi.c ansi.h)
+else()
+  include_directories(${CURSES_INCLUDE_DIRS})
+endif()
 
 # Finalize config header
 configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 add_executable(mg ${MG_SRCS})
 target_compile_definitions(mg PUBLIC -DDATADIR=\"${DATADIR}\" -DDOCDIR=\"${DOCDIR}\")
+if (ENABLE_CURSES AND CURSES_LIBRARIES)
+  target_link_libraries(mg ${CURSES_LIBRARIES})
+endif()
 install(TARGETS mg
   RUNTIME DESTINATION ${BIN_DIR}
   LIBRARY DESTINATION ${LIB_DIR}

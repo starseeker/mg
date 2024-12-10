@@ -11,6 +11,7 @@ option(ENABLE_CSCOPE "Cscope support" ON )
 option(ENABLE_CTAGS "ctags(1) support, required by Cscope" ON)
 option(ENABLE_DIRED "directory editor" ON)
 option(ENABLE_REGEXP "full regexp search" ON)
+option(ENABLE_CURSES "use system (n)curses package" ON)
 
 include(CheckIncludeFiles)
 check_include_files(pty.h HAVE_PTY_H)
@@ -31,6 +32,11 @@ if(ENABLE_COMPILE)
   set(ENABLE_COMPILE_GREP ON)
 endif()
 
+# mg can build without curses, but will use it if
+# it is present.
+if(ENABLE_CURSES)
+  find_package(Curses)
+endif()
 
 if (NOT DEFINED BIN_DIR)
   set (BIN_DIR bin)
