@@ -9,6 +9,14 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
   )
 
+option(ENABLE_AUTOEXEC "auto-execute support" ON )
+option(ENABLE_CMODE "C-mode support" ON)
+option(ENABLE_COMPILE "C compile & grep mode, used by C-mode" ON )
+option(ENABLE_CSCOPE "Cscope support" ON )
+option(ENABLE_CTAGS "ctags(1) support, required by Cscope" ON)
+option(ENABLE_DIRED "directory editor" ON)
+option(ENABLE_REGEXP "full regexp search" ON)
+
 include(CheckIncludeFiles)
 check_include_files(pty.h HAVE_PTY_H)
 check_include_files(utmp.h HAVE_UTMP_H)
@@ -22,6 +30,11 @@ check_function_exists(reallocarray HAVE_REALLOCARRAY)
 check_function_exists(strlcat HAVE_STRLCAT)
 check_function_exists(strlcpy HAVE_STRLCPY)
 check_function_exists(strtonum HAVE_STRTONUM)
+
+# Translate options to defines
+if(ENABLE_COMPILE)
+  set(ENABLE_COMPILE_GREP ON)
+endif()
 
 configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 

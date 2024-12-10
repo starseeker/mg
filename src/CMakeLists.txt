@@ -2,7 +2,9 @@ set(MG_SRCS
   basic.c
   bell.c
   buffer.c
+  chrdef.h
   cinfo.c
+  def.h
   dir.c
   display.c
   echo.c
@@ -10,37 +12,58 @@ set(MG_SRCS
   file.c
   fileio.c
   funmap.c
+  funmap.h
   help.c
   interpreter.c
   kbd.c
+  kbd.h
+  key.h
   keymap.c
   line.c
   macro.c
+  macro.h
   main.c
   match.c
   modes.c
   paragraph.c
+  pathnames.h
   region.c
   search.c
   spawn.c
   tty.c
+  ttydef.h
   ttyio.c
   ttykbd.c
-  ttydef.h
   undo.c
   util.c
   version.c
   window.c
   word.c
   yank.c
-  chrdef.h
-  def.h
-  funmap.h
-  kbd.h
-  key.h
-  macro.h
-  pathnames.h
   )
+
+if (ENABLE_AUTOEXEC)
+  list(APPEND MG_SRCS autoexec.c)
+endif()
+if (ENABLE_CMODE)
+  list(APPEND MG_SRCS cmode.c)
+endif()
+if (ENABLE_COMPILE)
+  list(APPEND MG_SRCS grep.c)
+endif()
+if (ENABLE_CSCOPE)
+  list(APPEND MG_SRCS cscope.c)
+endif()
+if (ENABLE_CTAGS)
+  list(APPEND MG_SRCS tags.c)
+endif()
+if (ENABLE_DIRED)
+  list(APPEND MG_SRCS dired.c)
+endif()
+if (ENABLE_REGEXP)
+  list(APPEND MG_SRCS re_search.c)
+endif()
+
 
 set(lib_srcs
   fparseln

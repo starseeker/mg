@@ -2,6 +2,14 @@
 #define PACKAGE_NAME "mg"
 #define PACKAGE_STRING "mg 3.7"
 
+#cmakedefine ENABLE_AUTOEXEC 1
+#cmakedefine ENABLE_CMODE 1
+#cmakedefine ENABLE_COMPILE_GREP 1
+#cmakedefine ENABLE_CSCOPE 1
+#cmakedefine ENABLE_CTAGS 1
+#cmakedefine ENABLE_DIRED 1
+#cmakedefine ENABLE_REGEXP 1
+
 #cmakedefine HAVE_FPARSELN 1
 #cmakedefine HAVE_FUTIMENS 1
 #cmakedefine HAVE_LOGIN_TTY 1
