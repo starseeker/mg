@@ -4,11 +4,6 @@ cmake_minimum_required(VERSION 3.18)
 # Set CMake project name
 project(MG)
 
-include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}/src
-  ${CMAKE_CURRENT_BINARY_DIR}
-  )
-
 option(ENABLE_AUTOEXEC "auto-execute support" ON )
 option(ENABLE_CMODE "C-mode support" ON)
 option(ENABLE_COMPILE "C compile & grep mode, used by C-mode" ON )
@@ -36,7 +31,6 @@ if(ENABLE_COMPILE)
   set(ENABLE_COMPILE_GREP ON)
 endif()
 
-configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
 if (NOT DEFINED BIN_DIR)
   set (BIN_DIR bin)

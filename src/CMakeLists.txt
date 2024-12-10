@@ -1,3 +1,8 @@
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_BINARY_DIR}
+  )
+
 set(MG_SRCS
   basic.c
   bell.c
@@ -85,6 +90,9 @@ endforeach()
 
 # For building without ncurses
 list(APPEND MG_SRCS ansi.c ansi.h)
+
+# Finalize config header
+configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 add_executable(mg ${MG_SRCS})
 target_compile_definitions(mg PUBLIC -DDATADIR=\"${DATADIR}\" -DDOCDIR=\"${DOCDIR}\")
