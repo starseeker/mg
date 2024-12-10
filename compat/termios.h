@@ -252,7 +252,7 @@ struct termios {
 #define TCIOFF		3
 #define TCION		4
 
-#include <sys/_types.h>
+#include <sys/types.h>
 
 #if __XPG_VISIBLE >= 420 || __POSIX_VISIBLE >= 200809
 #ifndef _PID_T_DEFINED_
