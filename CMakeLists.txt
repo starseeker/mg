@@ -14,6 +14,9 @@ option(ENABLE_REGEXP "full regexp search" ON)
 option(ENABLE_CURSES "use system (n)curses package" ON)
 
 find_library(UTIL_LIBRARY util)
+if(UTIL_LIBRARY)
+  set(CMAKE_REQUIRED_LIBRARIES ${UTIL_LIBRARY})
+endif()
 
 include(CheckIncludeFiles)
 check_include_files(pty.h HAVE_PTY_H)
