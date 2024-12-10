@@ -9,9 +9,21 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
   )
 
-file(WRITE ${CMAKE_BINARY_DIR}/config.h "#define WITHOUT_CURSES 1\n")
-file(APPEND ${CMAKE_BINARY_DIR}/config.h "#define PACKAGE_NAME \"mg\"\n")
-file(APPEND ${CMAKE_BINARY_DIR}/config.h "#define PACKAGE_STRING \"mg -1\"\n")
+include(CheckIncludeFiles)
+check_include_files(pty.h HAVE_PTY_H)
+check_include_files(utmp.h HAVE_UTMP_H)
+
+include(CheckFunctionExists)
+check_function_exists(fparseln HAVE_FPARSELN)
+check_function_exists(futimens HAVE_FUTIMENS)
+check_function_exists(login_tty HAVE_LOGIN_TTY)
+check_function_exists(openpty HAVE_OPENPTY)
+check_function_exists(reallocarray HAVE_REALLOCARRAY)
+check_function_exists(strlcat HAVE_STRLCAT)
+check_function_exists(strlcpy HAVE_STRLCPY)
+check_function_exists(strtonum HAVE_STRTONUM)
+
+configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
 if (NOT DEFINED BIN_DIR)
   set (BIN_DIR bin)
@@ -20,6 +32,9 @@ endif (NOT DEFINED BIN_DIR)
 if (NOT DEFINED LIB_DIR)
   set (LIB_DIR lib)
 endif (NOT DEFINED LIB_DIR)
+
+set(DATADIR "share")
+set(DOCDIR "share/doc")
 
 add_subdirectory(src)
 

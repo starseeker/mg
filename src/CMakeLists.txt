@@ -42,12 +42,29 @@ set(MG_SRCS
   pathnames.h
   )
 
-list(APPEND MG_SRCS ../lib/strtonum.c)
+set(lib_srcs
+  fparseln
+  futimens
+  login_tty
+  openpty
+  reallocarray
+  strlcat
+  strlcpy
+  strtonum
+  )
+
+foreach(lsrc ${lib_srcs})
+  string(TOUPPER ${lsrc} ULSRC)
+  if (NOT HAVE_${ULSRC})
+    list(APPEND MG_SRCS ../lib/${lsrc}.c)
+  endif ()
+endforeach()
 
 # For building without ncurses
 list(APPEND MG_SRCS ansi.c ansi.h)
 
 add_executable(mg ${MG_SRCS})
+target_compile_definitions(mg PUBLIC -DDATADIR=\"${DATADIR}\" -DDOCDIR=\"${DOCDIR}\")
 install(TARGETS mg
   RUNTIME DESTINATION ${BIN_DIR}
   LIBRARY DESTINATION ${LIB_DIR}
