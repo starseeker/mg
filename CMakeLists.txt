@@ -18,6 +18,8 @@ if(UTIL_LIBRARY)
   set(CMAKE_REQUIRED_LIBRARIES ${UTIL_LIBRARY})
 endif()
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/compat)
+
 include(CheckIncludeFiles)
 check_include_files(pty.h HAVE_PTY_H)
 check_include_files(utmp.h HAVE_UTMP_H)

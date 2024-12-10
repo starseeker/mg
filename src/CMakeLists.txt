@@ -84,7 +84,7 @@ set(lib_srcs
 foreach(lsrc ${lib_srcs})
   string(TOUPPER ${lsrc} ULSRC)
   if (NOT HAVE_${ULSRC})
-    list(APPEND MG_SRCS ../lib/${lsrc}.c)
+    list(APPEND MG_SRCS ../compat/${lsrc}.c)
   endif ()
 endforeach()
 
