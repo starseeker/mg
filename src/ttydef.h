@@ -10,7 +10,9 @@
 #define TTYDEF_H
 
 #include "config.h"
+#ifdef HAVE_TERMIOS_H
 #include <termios.h>
+#endif
 
 #define	putpad(str, num)	tputs(str, num, ttputc)
 

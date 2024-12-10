@@ -6,6 +6,8 @@
  *	Mainline.
  */
 
+#include "config.h"
+
 #include <err.h>
 #include <limits.h>
 #include <locale.h>
@@ -13,7 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef HAVE_TERMIOS_H
 #include <termios.h>
+#endif
 #include <unistd.h>
 
 #include "def.h"
